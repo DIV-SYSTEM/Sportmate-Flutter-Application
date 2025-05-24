@@ -3,7 +3,7 @@ name: Build Release APK
 on:
   push:
     branches:
-      - main   # or your default branch
+      - main
   workflow_dispatch:
 
 jobs:
@@ -17,10 +17,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.12'   # Use stable or your required Flutter version
-
-      - name: Enable Flutter web and Android
-        run: flutter config --enable-android
+          flutter-version: '3.7.12'  # Or your desired version
 
       - name: Get Flutter dependencies
         run: flutter pub get
@@ -29,7 +26,7 @@ jobs:
         run: flutter build apk --release --no-shrink
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
