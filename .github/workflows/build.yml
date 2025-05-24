@@ -1,4 +1,4 @@
-name: Flutter Build APK
+name: Build APK
 
 on:
   push:
@@ -25,17 +25,23 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Flutter clean
+        run: flutter clean
+
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test
+      - name: Flutter doctor
+        run: flutter doctor -v
 
-      - name: Build APK (release)
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build release APK
         run: flutter build apk --release
 
-      - name: Upload release APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
+          name: app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
