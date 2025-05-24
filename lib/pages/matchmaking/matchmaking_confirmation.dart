@@ -31,7 +31,7 @@ class MatchmakingConfirmation extends StatelessWidget {
             Text(
               'Matchmaking with $playerName is confirmed!',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 16),
             ElevatedButton(
