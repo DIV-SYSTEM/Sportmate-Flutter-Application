@@ -27,7 +27,7 @@ class Schedule extends StatelessWidget {
           bodyMedium: TextStyle(
             fontFamily: 'Poppins',
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontFamily: 'Poppins',
           ),
           subtitle1: TextStyle(
