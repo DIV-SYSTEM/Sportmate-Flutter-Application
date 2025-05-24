@@ -30,7 +30,7 @@ class Schedule extends StatelessWidget {
           labelLarge: TextStyle(
             fontFamily: 'Poppins',
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle( // ✅ replaces deprecated `subtitle1`
             fontFamily: 'Poppins',
             fontStyle: FontStyle.italic,
           ),
