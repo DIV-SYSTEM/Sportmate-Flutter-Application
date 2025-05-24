@@ -1,4 +1,4 @@
-name: Build Flutter APK
+name: Flutter Build APK
 
 on:
   push:
@@ -8,22 +8,23 @@ on:
 
 jobs:
   build:
+    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.10.0'
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Install dependencies
         run: flutter pub get
@@ -31,8 +32,8 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload release APK
+        uses: actions/upload-artifact@v2.3.1  # ✅ this works
         with:
-          name: sportmate-release-apk
+          name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
