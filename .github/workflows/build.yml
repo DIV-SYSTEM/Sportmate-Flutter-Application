@@ -1,47 +1,29 @@
-name: Build APK
-
+name: Build Sport Mate APK
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          flutter-version: '3.32.0'
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Flutter clean
-        run: flutter clean
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Flutter doctor
-        run: flutter doctor -v
-
-      - name: Make gradlew executable
-        run: chmod +x android/gradlew
-
-      - name: Build release APK
-        run: flutter build apk --release
-
+          node-version: '18'
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+      - name: Install Dependencies
+        run: npm install
+      - name: Build APK
+        run: eas build --platform android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: sport-mate-app.apk
+          path: '*.apk'
