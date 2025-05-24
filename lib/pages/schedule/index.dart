@@ -21,7 +21,7 @@ class Schedule extends StatelessWidget {
           ),
         ),
         textTheme: const TextTheme(
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             fontFamily: 'Poppins',
           ),
           bodyText2: TextStyle(
